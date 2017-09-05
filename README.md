@@ -26,6 +26,6 @@ Using the same methods, loops through the static resources again, and zips up th
 
 ---
 
-Things you can't do:
+### Things you can't do:
 
 zip/unzip an individual file (just use CLI zip...this is for doing a bunch in bulk!)
