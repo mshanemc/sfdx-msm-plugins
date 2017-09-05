@@ -4,6 +4,8 @@ Making SFDX flow easier.
 
 Install plugin: `sfdx plugins:install sfdx-msm-plugin`
 
+---
+
 ## Usage
 
 ### unzip all your zipped static resources
@@ -15,12 +17,14 @@ Then it creates (if you don't have one already) a folder called **resource-bundl
 
 You did want to check those static resources into source, right? :)
 
+---
+
 ### zip them all back up
 `sfdx msm:static:zip`
 
 Using the same methods, loops through the static resources again, and zips up their local equivalent from the **resource-bundles** folder
 
-===
+---
 
 Things you can't do:
 
