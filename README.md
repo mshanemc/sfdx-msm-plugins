@@ -1,10 +1,8 @@
-A plugin for the SFDX CLI with a number of useful commands.
+Making SFDX flow easier.
 
 ## Setup
 
 Install plugin: `sfdx plugins:install sfdx-msm-plugin`
-
-===
 
 ## Usage
 
