@@ -4,9 +4,9 @@
   "description": "sfdx plugins by Shane",
   "main": "index.js",
   "author": "Shane McLaughlin @mshanemc",
-  "repository": "mshanemc/sfdx-msm-plugin",
+  "repository": "mshanemc/sfdx-msm-plugins",
   "bugs": {
-    "url": "https://github.com/mshanemc/sfdx-msm-plugin/issues"
+    "url": "https://github.com/mshanemc/sfdx-msm-plugins/issues"
   },
   "keywords": [
     "force.com",
