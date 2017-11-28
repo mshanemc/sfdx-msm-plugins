@@ -1,5 +1,7 @@
 const zip = require('./commands/zipStatic.js');
 const unzip = require('./commands/unzipStatic.js');
+const upload = require('./commands/uploadFile.js');
+const userPhoto = require('./commands/userPhoto.js');
 
 (function () {
   'use strict';
@@ -10,6 +12,12 @@ const unzip = require('./commands/unzipStatic.js');
   },{
     name: 'zipStatic',
     description: 'zips static resources'
+  },{
+    name: 'uploadFile.js',
+    description: 'uploads files'
+  }, {
+    name: 'userPhoto.js',
+    description: 'set user Chatter photos'
   }];
 
   exports.namespace = {
@@ -19,7 +27,9 @@ const unzip = require('./commands/unzipStatic.js');
 
   exports.commands = [
     unzip,
-    zip
+    zip,
+    upload,
+    userPhoto
   ];
 
 }());
