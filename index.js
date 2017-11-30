@@ -2,6 +2,7 @@ const zip = require('./commands/zipStatic.js');
 const unzip = require('./commands/unzipStatic.js');
 const upload = require('./commands/uploadFile.js');
 const userPhoto = require('./commands/userPhoto.js');
+const packageRetrieve = require('./commands/packageRetrieve.js');
 
 (function () {
   'use strict';
@@ -18,6 +19,9 @@ const userPhoto = require('./commands/userPhoto.js');
   }, {
     name: 'userPhoto.js',
     description: 'set user Chatter photos'
+  }, {
+    name: 'packageRetrieve.js',
+    description: 'retrieve package from existing org'
   }];
 
   exports.namespace = {
@@ -29,7 +33,8 @@ const userPhoto = require('./commands/userPhoto.js');
     unzip,
     zip,
     upload,
-    userPhoto
+    userPhoto,
+    packageRetrieve
   ];
 
 }());

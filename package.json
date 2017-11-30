@@ -19,6 +19,7 @@
   "dependencies": {
     "archiver": "^2.0.3",
     "async": "^2.1.5",
+    "child-process-promise": "^2.2.1",
     "child_process": "^1.0.2",
     "decompress": "^4.2.0",
     "decompress-unzip": "^4.0.1",
