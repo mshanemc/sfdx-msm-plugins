@@ -42,8 +42,14 @@ const fs = require('fs-extra-promisify');
 				org.force._getConnection(org, org.config).then((conn) => {
 					targetUsername = org.authConfig.username;
 
+					let query;
+					if (context.flags.firstName){
+						query = `Select Id from User where LastName = '${context.flags.lastName}' and FirstName = '${context.flags.firstName}'`;
+					} else {
+						query = `Select Id from User where LastName = '${context.flags.lastName}'`;
+					}
 					//first, query the user
-					conn.query(`Select Id from User where FirstName = '${context.flags.firstName}' and LastName = '${context.flags.lastName}'`)
+					conn.query(query)
 					.then( (result) => {
 						if (result.totalSize > 1) {
 							return console.log('There are more than 1 result for that name.');
@@ -75,7 +81,11 @@ const fs = require('fs-extra-promisify');
 						return conn.chatter.resource(`/connect/user-profiles/${userid}/photo`).update({fileId: CVresults.records[0].ContentDocumentId});
 					})
 					.then(() => {
-						console.log(`Successfully set chatter photo for user ${userid} (${context.flags.firstName} ${context.flags.lastName})`);
+						if (context.flags.firstName){
+							console.log(`Successfully set chatter photo for user ${userid} (${context.flags.firstName} ${context.flags.lastName})`);
+						} else {
+							console.log(`Successfully set chatter photo for user ${userid} (${context.flags.lastName})`);
+						}
 					})
 					.catch((err) => {
 						console.log(`Error: ${err}`);
