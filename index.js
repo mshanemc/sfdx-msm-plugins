@@ -19,7 +19,8 @@ const packageRetrieve = require('./commands/packageRetrieve.js');
   }, {
     name: 'userPhoto.js',
     description: 'set user Chatter photos'
-  }, {
+  },
+  {
     name: 'packageRetrieve.js',
     description: 'retrieve package from existing org'
   }];
