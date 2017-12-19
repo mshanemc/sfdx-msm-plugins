@@ -33,6 +33,7 @@
     "nodeJs-zip": "^1.0.4",
     "recursive-readdir": "^2.1.1",
     "request": "^2.81.0",
+    "request-promise-native": "^1.0.5",
     "salesforce-alm": "^40.0.6",
     "url-exists": "^1.0.3",
     "xml2js": "^0.4.19"

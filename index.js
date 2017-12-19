@@ -3,6 +3,7 @@ const unzip = require('./commands/unzipStatic.js');
 const upload = require('./commands/uploadFile.js');
 const userPhoto = require('./commands/userPhoto.js');
 const packageRetrieve = require('./commands/packageRetrieve.js');
+const passwordSet = require('./commands/passwordSet.js');
 
 (function () {
   'use strict';
@@ -23,6 +24,10 @@ const packageRetrieve = require('./commands/packageRetrieve.js');
   {
     name: 'packageRetrieve.js',
     description: 'retrieve package from existing org'
+  },
+  {
+    name: 'passwordSet.js',
+    description: 'set the password for a user in a scratch org'
   }];
 
   exports.namespace = {
@@ -35,7 +40,8 @@ const packageRetrieve = require('./commands/packageRetrieve.js');
     zip,
     upload,
     userPhoto,
-    packageRetrieve
+    packageRetrieve,
+    passwordSet
   ];
 
 }());

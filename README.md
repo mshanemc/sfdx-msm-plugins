@@ -42,6 +42,12 @@ Sets the chatter photo for the user who has a first name Oscar and last name May
 
 ---
 
+### Manually set a password
+`sfdx msm:user:password:set -u cg1 -p sfdx1234 -g Oscar -l Mayer`
+
+Sets Oscar's password to be sfdx1234 in the scratch org whose alias is cg1.
+---
+
 ### Retrieving a package, unzipping, converting
 `sfdx msm:mdapi:package:get -u cg1 -p "Reporting Objects" -d testApp`
 
