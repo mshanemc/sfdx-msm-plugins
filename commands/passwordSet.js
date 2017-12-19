@@ -106,7 +106,7 @@ const rp = require('request-promise-native');
 								let output = {
 									status: 1,
 									message: err
-								}
+								};
 								console.error(JSON.stringify(output));
 							} else {
 								console.error(`Error: ${err}`);
