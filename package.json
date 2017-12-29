@@ -1,6 +1,6 @@
 {
   "name": "sfdx-msm-plugin",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "sfdx plugins by Shane",
   "main": "index.js",
   "author": "Shane McLaughlin @mshanemc",
