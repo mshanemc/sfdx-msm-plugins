@@ -87,7 +87,7 @@ const usernameURL = 'https://unique-username-generator.herokuapp.com/unique';
 
 async function execAsync(command) {
 	// console.log('command starting');
-	try{
+	try {
 		const { stdout, stderr } = await exec(command);
 		// console.log('command completed');
 		if (stdout) {
@@ -99,7 +99,6 @@ async function execAsync(command) {
 		console.error(err);
 	}
 }
-
 
 (function () {
 	'use strict';

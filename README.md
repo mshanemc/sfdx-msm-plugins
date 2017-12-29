@@ -59,3 +59,10 @@ The quotes are optional unless you've got a space in the name.  -p is the packag
 ### Things you can't do:
 
 zip/unzip an individual file (just use CLI zip...this is for doing a bunch in bulk!)
+
+
+---
+
+## Testing
+
+`mocha tests --recursive --watch`
