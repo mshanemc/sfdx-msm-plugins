@@ -49,6 +49,15 @@ Sets Oscar's password to be sfdx1234 in the scratch org whose alias is cg1.
 
 ---
 
+### Create an org with a friendly username
+`sfdx msm:org:create -f config/project-scratch-def.json -u shane -o junk.test`
+
+All the basic parameters from **force:org:create**, but generates a more customizable url that will be `shane789@junk.test` where the 789 is a unique sequential id for the combination of the -u and -o specified.  There's a service running to issue these ids.
+
+
+---
+
+
 ### Retrieving a package, unzipping, converting
 `sfdx msm:mdapi:package:get -u cg1 -p "Reporting Objects" -d testApp`
 
