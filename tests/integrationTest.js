@@ -35,7 +35,6 @@ describe('tests orgCreate', function() {
 
 		try {
 			const { stdout, stderr } = await exec(command);
-			console.log('json completed')
 			if (stdout){
 				console.log(stdout);
 				resultJSON = JSON.parse(stdout);

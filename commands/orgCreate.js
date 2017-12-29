@@ -96,8 +96,6 @@ const usernameURL = 'https://unique-username-generator.herokuapp.com/unique';
 		help: 'Drop-in replacement for force:org:create but with a less ugly username',
 		flags: flags,
 		run(context) {
-
-			let spawnArgs = [];
 			// gets the unique username
 			request({
 				method: 'post',
