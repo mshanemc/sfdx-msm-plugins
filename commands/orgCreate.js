@@ -1,6 +1,8 @@
 const request = require('request');
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
+// const util = require('util');
+// const exec = util.promisify(require('child_process').exec);
+const execSync = require('child_process').execSync;
+//const exec = require('child-process-promise').exec;
 
 const flags = [
 	{
@@ -84,22 +86,6 @@ const flags = [
 
 const usernameURL = 'https://unique-username-generator.herokuapp.com/unique';
 
-
-async function execAsync(command) {
-	// console.log('command starting');
-	try {
-		const { stdout, stderr } = await exec(command);
-		// console.log('command completed');
-		if (stdout) {
-			console.log(stdout);
-		} else if (stderr) {
-			console.error(stderr);
-		}
-	} catch (err){
-		console.error(err);
-	}
-}
-
 (function () {
 	'use strict';
 
@@ -111,6 +97,7 @@ async function execAsync(command) {
 		flags: flags,
 		run(context) {
 
+			let spawnArgs = [];
 			// gets the unique username
 			request({
 				method: 'post',
@@ -130,8 +117,12 @@ async function execAsync(command) {
 						if (foundFlag){
 							if (foundFlag.hasValue){
 								// has a value
+								//spawnArgs.push(`--${foundFlag.name}`);
+								//spawnArgs.push(context.flags[foundFlag.name]);
+
 								command = `${command} --${foundFlag.name} ${context.flags[foundFlag.name]}`;
 							} else { // no value
+								//spawnArgs.push(`--${foundFlag.name}`);
 								command = `${command} --${foundFlag.name}`;
 							}
 						} else {
@@ -139,14 +130,44 @@ async function execAsync(command) {
 						}
 					}
 				}
+
+				//spawnArgs.push(`username="${username.message}"`);
+
+				// spawnArgs.push(context.flags[foundFlag.name]);
 				command = `${command} username="${username.message}"`;
 
-				if (!context.flags.json){
-					console.log(`executing ${command}...`);
-					execAsync(command);
-				} else {
-					execAsync(command);
-				}
+				//let lineResult = await exec(command);
+				execSync(command, { stdio: [0, 1, 2] });
+				//console.log(lineResult.stdout);
+
+				// setTimeout(() => {
+				// 	// keep the event loop busy
+				// }, 20000);
+
+				// //console.log(spawnArgs);
+				// const proc = spawn(command, {
+				// 	shell: true
+				// });
+
+				// //let keepAlive = true;
+
+				// proc.stdout.on('data', (data) => {
+				// 	console.log(`stdout: ${data}`);
+
+				// });
+
+				// proc.stderr.on('data', (data) => {
+				// 	console.log(`stderr: ${data}`);
+				// });
+
+				// proc.on('close', (code) => {
+				// 	console.log(`child process exited with code ${code}`);
+				// });
+
+				// while (keepAlive){
+				// 	// console.log('waiting...');
+				// }
+
 			});
 
 		}

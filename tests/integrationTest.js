@@ -14,7 +14,7 @@ const prefix = 'orgcreateauto';
 const domain = 'mocha.test';
 
 describe('tests orgCreate', function() {
-	this.timeout(20000);
+	this.timeout(80000);
 
 	it('creates a command without json', async function(){
 		let command = `sfdx msm:org:create -f tests/exampleConfig.json -u ${prefix} -o ${domain}`;
@@ -22,7 +22,9 @@ describe('tests orgCreate', function() {
 		console.log(stdout);
 		console.log(stderr);
 
-		expect(stdout).to.have.string('executing sfdx force:org:create');
+		expect(stdout).to.have.string('Successfully created scratch org:');
+		expect(stdout).to.have.string(prefix);
+		expect(stdout).to.have.string(domain);
 		expect(stderr).to.equal('');
 
 	});
@@ -33,6 +35,7 @@ describe('tests orgCreate', function() {
 
 		try {
 			const { stdout, stderr } = await exec(command);
+			console.log('json completed')
 			if (stdout){
 				console.log(stdout);
 				resultJSON = JSON.parse(stdout);
@@ -119,7 +122,7 @@ describe('tests backend username service', function () {
 describe('tests passwordSet', function () {
 	this.timeout(500000);
 
-	it.only('sets the password', async function () {
+	it('sets the password', async function () {
 		let command = 'sfdx force:org:create -f tests/exampleConfig.json -s';
 		await exec(command);
 		command = 'sfdx msm:user:password:set -p passw1rd -g User -l User --json';
