@@ -1,5 +1,9 @@
-const exec = require('child-process-promise').exec;
+const { execSync } = require('child_process');
 const tmpDir = 'mdapiout';
+
+function errorHandler(result, successMessage) {
+	console.log(successMessage);
+}
 
 (function () {
 	'use strict';
@@ -31,23 +35,20 @@ const tmpDir = 'mdapiout';
 		run(context) {
 			const dest = context.flags.destination || './force-app';
 
-			exec(`sfdx force:mdapi:retrieve -s -p "${context.flags.packageName}" -u ${context.flags.sourceOrg}  -r ./${tmpDir} -w 30`)
-			.then( (result)=>{
-				console.log('Package Retrieved.  Unzipping...');
-				return exec(`unzip ./${tmpDir}/unpackaged.zip -d ./${tmpDir}`);
-			})
-			.then( (result) =>{
-				console.log('Package Unzipped.  Converting...');
-				return exec(`sfdx force:mdapi:convert -r ./${tmpDir} -d ${dest}`);
-			})
-			.then( (result) => {
-				console.log('Package Converted.  Cleaning up...');
-				return exec(`rm -rf ./${tmpDir}`);
-			})
-			.then( (result)=>{
-				console.log('Done!');
-			})
-			.catch((result) => { console.log(result.stderr);});
+			let result = execSync(`sfdx force:mdapi:retrieve -s -p "${context.flags.packageName}" -u ${context.flags.sourceOrg}  -r ./${tmpDir} -w 30`);
+			errorHandler(result, 'Package Retrieved.  Unzipping...');
+
+			result = execSync(`unzip -o ./${tmpDir}/unpackaged.zip -d ./${tmpDir}`);
+			errorHandler(result, 'Package Unzipped.  Converting...');
+
+			result = execSync(`sfdx force:mdapi:convert -r ./${tmpDir} -d ${dest}`);
+			errorHandler(result, 'Package Converted.  Cleaning up...');
+
+			result = execSync(`rm -rf ./${tmpDir}`);
+			errorHandler(result, 'Done!');
+
 		}
 	};
+
+
 }());
