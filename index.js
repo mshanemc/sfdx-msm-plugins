@@ -4,11 +4,12 @@ const upload = require('./commands/uploadFile.js');
 const userPhoto = require('./commands/userPhoto.js');
 const packageRetrieve = require('./commands/packageRetrieve.js');
 const passwordSet = require('./commands/passwordSet.js');
+const orgCreate = require('./commands/orgCreate.js');
 
 (function () {
   'use strict';
 
-  exports.topics = [{
+exports.topics = [{
     name: 'unzipStatic',
     description: 'unzips zipped static resources'
   },{
@@ -28,7 +29,11 @@ const passwordSet = require('./commands/passwordSet.js');
   {
     name: 'passwordSet.js',
     description: 'set the password for a user in a scratch org'
-  }];
+  },
+    {
+      name: 'orgCreate.js',
+      description: 'creates an org, but with a friendlier username than the default version'
+    }];
 
   exports.namespace = {
     name: 'msm',
@@ -41,7 +46,8 @@ const passwordSet = require('./commands/passwordSet.js');
     upload,
     userPhoto,
     packageRetrieve,
-    passwordSet
+    passwordSet,
+    orgCreate
   ];
 
 }());
