@@ -5,6 +5,7 @@ const userPhoto = require('./commands/userPhoto.js');
 const packageRetrieve = require('./commands/packageRetrieve.js');
 const passwordSet = require('./commands/passwordSet.js');
 const orgCreate = require('./commands/orgCreate.js');
+const remoteSite = require('./commands/remoteSite.js');
 
 (function () {
   'use strict';
@@ -33,7 +34,12 @@ exports.topics = [{
     {
       name: 'orgCreate.js',
       description: 'creates an org, but with a friendlier username than the default version'
-    }];
+    },
+  {
+    name: 'remoteSite.js',
+    description: 'Add a remote site setting to your local repo'
+  }
+  ];
 
   exports.namespace = {
     name: 'msm',
@@ -47,7 +53,8 @@ exports.topics = [{
     userPhoto,
     packageRetrieve,
     passwordSet,
-    orgCreate
+    orgCreate,
+    remoteSite
   ];
 
 }());
