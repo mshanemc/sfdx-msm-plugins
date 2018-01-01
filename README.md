@@ -65,6 +65,13 @@ The quotes are optional unless you've got a space in the name.  -p is the packag
 
 ---
 
+### Add a remote site setting
+`sfdx msm:remotesite:create -u https://google.com -n google -d "you know, for stuff"`
+
+Creates a remote site setting in force-app/main/default (or, with `-t`, the path you specify) with the give url, name, and optional description.  You still need to push it to your org.  Creates in the DX format, not the mdapi format, so do force:source:convert and don't set `-t` to `src`
+
+---
+
 ### Things you can't do:
 
 zip/unzip an individual file (just use CLI zip...this is for doing a bunch in bulk!)
