@@ -6,6 +6,7 @@ const packageRetrieve = require('./commands/packageRetrieve.js');
 const passwordSet = require('./commands/passwordSet.js');
 const orgCreate = require('./commands/orgCreate.js');
 const remoteSite = require('./commands/remoteSite.js');
+const unpkg = require('./commands/unpackagedRetrieve.js');
 
 (function () {
   'use strict';
@@ -26,6 +27,10 @@ exports.topics = [{
   {
     name: 'packageRetrieve.js',
     description: 'retrieve package from existing org'
+  },
+  {
+    name: 'unpackageRetrieve.js',
+    description: 'pulls stuff based on a package.xml template'
   },
   {
     name: 'passwordSet.js',
@@ -54,7 +59,8 @@ exports.topics = [{
     packageRetrieve,
     passwordSet,
     orgCreate,
-    remoteSite
+    remoteSite,
+    unpkg
   ];
 
 }());

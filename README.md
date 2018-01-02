@@ -65,6 +65,13 @@ The quotes are optional unless you've got a space in the name.  -p is the packag
 
 ---
 
+### Retrieving unpackaged source, unzipping, converting
+`sfdx msm:mdapi:pull -u cg1 -c`
+
+Pulls all the code (apex, VF, components, static resources) for the specified non-scratch org and converts them into sfdx source format.  You can specify -d (instead of `force-app`) and also use the improbable-to-work-on-the-first-try `-a` to  pull **nearly everything** (good luck with that!).
+
+---
+
 ### Add a remote site setting
 `sfdx msm:remotesite:create -u https://google.com -n google -d "you know, for stuff"`
 
