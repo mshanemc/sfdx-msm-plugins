@@ -7,6 +7,7 @@ const passwordSet = require('./commands/passwordSet.js');
 const orgCreate = require('./commands/orgCreate.js');
 const remoteSite = require('./commands/remoteSite.js');
 const unpkg = require('./commands/unpackagedRetrieve.js');
+const convertZip = require('./commands/convertZip.js');
 
 (function () {
   'use strict';
@@ -31,6 +32,10 @@ exports.topics = [{
   {
     name: 'unpackageRetrieve.js',
     description: 'pulls stuff based on a package.xml template'
+  },
+  {
+    name: 'convertZip.js',
+    description: 'converts dx-source to mdapi and zips it up'
   },
   {
     name: 'passwordSet.js',
@@ -60,7 +65,8 @@ exports.topics = [{
     passwordSet,
     orgCreate,
     remoteSite,
-    unpkg
+    unpkg,
+    convertZip
   ];
 
 }());
