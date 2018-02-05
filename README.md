@@ -35,8 +35,8 @@ Uploads a local file at location `-f` and optionally names it, attaches it in Fi
 
 ---
 
-### Setting a user's Chatter profile pic
-`sfdx msm:user:photo -g Oscar -l Mayer -f ~/Downloads/King.png`
+### Setting a user's Chatter profile and/or banner pic
+`sfdx msm:user:photo -g Oscar -l Mayer -f ~/Downloads/King.png -b ~/Downloads/banner.png`
 
 Sets the chatter photo for the user who has a first name Oscar and last name Mayer.  I used -g for first name (given name) since -f usually refers to a file elsewhere in sfdx commands.
 

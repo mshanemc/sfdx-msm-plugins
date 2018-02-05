@@ -1,6 +1,32 @@
 const forceUtils = require('../lib/forceUtils');
 const fs = require('fs-extra-promisify');
 
+
+const uploadToDocId = (conn, localPath, title) => {
+	return new Promise((resolve, reject) => {
+		fs.readFile(localPath)
+			.then((filedata) => {
+				let base64data = filedata.toString('base64');
+				return conn.sobject('ContentVersion').create({
+					VersionData: base64data,
+					PathOnClient: localPath,
+					Title: title //context.flags.firstName + context.flags.lastName + 'ChatterPhoto'
+				});
+			})
+			.then((uploadedFile) => {
+				console.log(`Uploaded ${localPath} to ContentVersion ${uploadedFile.id}`);
+				return conn.query(`Select Id, ContentDocumentId from ContentVersion where Id='${uploadedFile.id}'`);
+			})
+			.then((queryResult)=>{
+				if (queryResult.records[0].ContentDocumentId){
+					resolve(queryResult.records[0].ContentDocumentId);
+				} else {
+					reject(queryResult);
+				}
+			});
+	});
+};
+
 (function () {
 	'use strict';
 
@@ -25,6 +51,12 @@ const fs = require('fs-extra-promisify');
 				name: 'file',
 				char: 'f',
 				description: 'local path of the photo to use',
+				hasValue: true,
+				required: false
+			}, {
+				name: 'banner',
+				char: 'b',
+				description: 'local path of the chatter banner photo to use',
 				hasValue: true,
 				required: false
 			}, {
@@ -62,29 +94,37 @@ const fs = require('fs-extra-promisify');
 						}
 					})
 					.then( () => {
-						return fs.readFile(context.flags.file);
-					})
-					.then( (filedata)=>{
-						//console.log(filedata);
-						let base64data = filedata.toString('base64');
-						return conn.sobject('ContentVersion').create({
-							VersionData: base64data,
-							PathOnClient: context.flags.file,
-							Title: context.flags.firstName + context.flags.lastName + 'ChatterPhoto'
-						});
-					})
-					.then( (uploadedFile)=>{
-						console.log(`Uploaded ${context.flags.file} to ContentVersion ${uploadedFile.id}`);
-						return conn.query(`Select Id, ContentDocumentId from ContentVersion where Id='${uploadedFile.id}'`);
-					})
-					.then((CVresults)=>{
-						return conn.chatter.resource(`/connect/user-profiles/${userid}/photo`).update({fileId: CVresults.records[0].ContentDocumentId});
+						if (context.flags.file){
+							//do the chatter file thing
+							// const uploadToDocId = (conn, localPath, title) => {
+							uploadToDocId(conn, context.flags.file, context.flags.firstName + context.flags.lastName + 'ChatterPhoto')
+								.then((ContentDocumentId) => {
+									return conn.chatter.resource(`/connect/user-profiles/${userid}/photo`).update({ fileId: ContentDocumentId });
+								})
+								.then(() => {
+									if (context.flags.firstName) {
+										return console.log(`Successfully set chatter photo for user ${userid} (${context.flags.firstName} ${context.flags.lastName})`);
+									} else {
+										return console.log(`Successfully set chatter photo for user ${userid} (${context.flags.lastName})`);
+									}
+								});
+						}
 					})
 					.then(() => {
-						if (context.flags.firstName){
-							console.log(`Successfully set chatter photo for user ${userid} (${context.flags.firstName} ${context.flags.lastName})`);
-						} else {
-							console.log(`Successfully set chatter photo for user ${userid} (${context.flags.lastName})`);
+						if (context.flags.banner) {
+							//do the chatter file thing
+							// const uploadToDocId = (conn, localPath, title) => {
+							uploadToDocId(conn, context.flags.banner, context.flags.firstName + context.flags.lastName + 'ChatterBanner')
+								.then((ContentDocumentId) => {
+									return conn.chatter.resource(`/connect/user-profiles/${userid}/banner-photo`).update({ fileId: ContentDocumentId });
+								})
+								.then(() => {
+									if (context.flags.firstName) {
+										return console.log(`Successfully set chatter banner for user ${userid} (${context.flags.firstName} ${context.flags.lastName})`);
+									} else {
+										return console.log(`Successfully set chatter banner for user ${userid} (${context.flags.lastName})`);
+									}
+								});
 						}
 					})
 					.catch((err) => {
@@ -97,3 +137,4 @@ const fs = require('fs-extra-promisify');
 		}
 	};
 }());
+
