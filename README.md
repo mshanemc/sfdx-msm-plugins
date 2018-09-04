@@ -1,3 +1,17 @@
+# Deprecated.  Archived
+
+## don't use this set of plugins.
+
+I migrated these to the oclif-based plugins here
+https://github.com/mshanemc/shane-sfdx-plugins
+
+(and added lots more)
+
+---
+
+why are you still here...?
+
+
 Making SFDX flow easier.
 
 ## Setup
